@@ -1,0 +1,64 @@
+.wrapper
+    padding: 15px
+    h2
+        font-weight: 500
+        font-size: 1.2em
+        margin: 0
+    .widgets
+        display: flex
+        align-items: flex-start
+        margin-top: 1em
+        flex-wrap: wrap
+        .widget
+            margin-right: 2em
+            margin-bottom: 1em
+            min-width: 90px
+            width: 90px
+            cursor: pointer
+            .widget__icon
+                border-radius: 6px
+                border: 1px solid #a5a2a5
+                width: 100%
+                height: 90px
+            .widget__name
+                font-size: .9em
+                text-align: center
+                margin-top: .5em
+                white-space: wrap
+                text-overflow: ellipsis
+                overflow: hidden
+                font-size: .9em
+
+@media (max-width: 1000px)
+    .wrapper
+        padding: 15px
+        h2
+            font-size: 1em
+            margin: 0
+        .widgets
+            display: flex
+            align-items: flex-start
+            justify-content: center
+
+            .widget
+                margin: 1em
+
+@media (max-width: 400px)
+    .wrapper
+        padding: 15px
+        h2
+            font-weight: 500
+            font-size: 1.2em
+            margin: 0
+        .widgets
+            display: flex
+            align-items: flex-start
+            margin-top: .5em
+            flex-wrap: wrap
+            .widget
+                margin-right: 1em
+                margin-bottom: .5em
+                min-width: 50px
+                width: 50px
+                .widget__icon
+                    height: 50px
