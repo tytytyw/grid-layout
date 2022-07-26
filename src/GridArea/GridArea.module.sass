@@ -1,0 +1,26 @@
+.wrapper
+    height: 100%
+    display: flex
+    flex-direction: column
+    .activeWidgets
+        overflow-y: auto
+        overflow-x: hidden
+        flex-grow: 1
+        border: 1px dashed #80808024
+        overflow-y: auto
+        scrollbar-color: #bebebe #c9c9c9a8
+        scrollbar-width: thin
+        background: linear-gradient(90deg, #fff 21px, transparent 1%) center, linear-gradient(#fff 21px, transparent 1%) center, #a799cc
+        background-size: 22px 22px
+
+        &::-webkit-scrollbar
+            width: 8px
+            height: 8px
+            background: #dbdbdba8
+
+        &::-webkit-scrollbar-track-piece
+            background: #dbdbdba8
+
+        &::-webkit-scrollbar-thumb:vertical
+            height: 8px
+            background: #bebebe

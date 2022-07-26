@@ -1,10 +1,13 @@
 import React from 'react';
-import './App.module.sass';
+import GridArea from '../GridArea/GridArea';
+import styles from './App.module.sass';
 
 const App = () => {
 
   return (
-    <div className="App"></div>
+    <div className={styles.App}>
+      <GridArea />
+    </div>
   );
 }
 
