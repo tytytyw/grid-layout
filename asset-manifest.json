@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/grid-layout/static/css/main.b77d4127.css",
+    "main.js": "/grid-layout/static/js/main.ecae2618.js",
+    "index.html": "/grid-layout/index.html",
+    "main.b77d4127.css.map": "/grid-layout/static/css/main.b77d4127.css.map",
+    "main.ecae2618.js.map": "/grid-layout/static/js/main.ecae2618.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b77d4127.css",
+    "static/js/main.ecae2618.js"
+  ]
+}
