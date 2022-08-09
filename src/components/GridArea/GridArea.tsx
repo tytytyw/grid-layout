@@ -1,3 +1,4 @@
+//  @ts-nocheck
 import { useState, useRef, useEffect } from 'react'
 import GridLayout from "react-grid-layout";
 import Button from '../Button/Button';
@@ -25,18 +26,10 @@ interface updatedGrigItem {
     y: number
 }
 
-const initialItems = [
-    { title: "Меню навигации", i: "menu", id: "menu", w: 12, h: 1, minH: 1, minW: 12, active: false },
-    { title: "Информер", i: "informer", id: "informer", w: 3, h: 2, minW: 3, minH: 1, active: false },
-    { title: "Личная информация", i: "personnel", id: "personnel", w: 6, h: 1, minH: 1, minW: 6, active: false },
-    { title: "Моя команда", i: "my-team", id: "my-team", w: 6, h: 1, minH: 1, minW: 6, active: false },
-    { title: "Документы", i: "docs", id: "docs", w: 6, h: 1, minH: 1, minW: 6, active: false },
-    { title: "Список заявок", i: "requests", id: "requests", w: 9, h: 1, minH: 1, minW: 9, active: false },
-    { title: "Новости", i: "news", id: "news", w: 3, h: 4, minH: 1, minW: 3, x: 9, y: 0, active: true }
-]
+const initialItems = (document.widgetsParams)
 
 const GridArea = () => {
-    const [passiveWidgets, setPassiveWidgets] = useState<Array<any>>(initialItems.filter(widget => widget.active === false))
+    const [passiveWidgets, setPassiveWidgets] = useState<Array<any>>([])
     const [activeWidgets, setactiveWidgets] = useState<Array<any>>([])
 
     const layoutRef = useRef<HTMLDivElement | null>(null)
@@ -73,7 +66,18 @@ const GridArea = () => {
                     x: el.x,
                     y: el.y,
                     w: el.w,
-                    h: el.h
+                    h: el.h,
+                    childs: null,
+                    locked: false,
+                    maxHeight: false,
+                    maxWidth: false,
+                    minHeight: el.minH,
+                    minWidth: el.minW,
+                    noMove: false,
+                    noResize: false,
+                    width: el.w,
+                    height: el.h,
+                    id: el.i
                 }
             })
             return newWidgetParam || widget
@@ -85,20 +89,15 @@ const GridArea = () => {
         setactiveWidgets(initialItems.filter(widget => widget.active))
     }
 
-    const saveWidgets = () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(activeWidgets)
-        };
-        fetch('', requestOptions)
-    }
+    useEffect(() => {
+        if (initialItems.length) setactiveWidgets(initialItems.filter(widget => widget.active))
+        if (initialItems.length) setPassiveWidgets(initialItems.filter(widget => widget.active === false))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initialItems])
 
     useEffect(() => {
-        if (passiveWidgets.length) setactiveWidgets(initialItems.filter(widget => widget.active))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
+        document.widgetsParams = activeWidgets
+    }, [activeWidgets])
 
     return (
         <div className={styles.wrapper} ref={layoutRef}>
@@ -132,7 +131,7 @@ const GridArea = () => {
                         <path fill="#a5a2a5" d="M15.854 12.854c-0-0-0-0-0-0l-4.854-4.854 4.854-4.854c0-0 0-0 0-0 0.052-0.052 0.090-0.113 0.114-0.178 0.066-0.178 0.028-0.386-0.114-0.529l-2.293-2.293c-0.143-0.143-0.351-0.181-0.529-0.114-0.065 0.024-0.126 0.062-0.178 0.114 0 0-0 0-0 0l-4.854 4.854-4.854-4.854c-0-0-0-0-0-0-0.052-0.052-0.113-0.090-0.178-0.114-0.178-0.066-0.386-0.029-0.529 0.114l-2.293 2.293c-0.143 0.143-0.181 0.351-0.114 0.529 0.024 0.065 0.062 0.126 0.114 0.178 0 0 0 0 0 0l4.854 4.854-4.854 4.854c-0 0-0 0-0 0-0.052 0.052-0.090 0.113-0.114 0.178-0.066 0.178-0.029 0.386 0.114 0.529l2.293 2.293c0.143 0.143 0.351 0.181 0.529 0.114 0.065-0.024 0.126-0.062 0.178-0.114 0-0 0-0 0-0l4.854-4.854 4.854 4.854c0 0 0 0 0 0 0.052 0.052 0.113 0.090 0.178 0.114 0.178 0.066 0.386 0.029 0.529-0.114l2.293-2.293c0.143-0.143 0.181-0.351 0.114-0.529-0.024-0.065-0.062-0.126-0.114-0.178z"></path>
                     </svg>
                 </Button>
-                <Button type='save' callback={saveWidgets}>
+                <Button type='save' callback={() => { console.log(document.widgetsParams) }}>
                     <svg version="1.1" width="16" height="16" viewBox="0 0 16 16">
                         <path fill="#a5a2a5" d="M14 0h-14v16h16v-14l-2-2zM8 2h2v4h-2v-4zM14 14h-12v-12h1v5h9v-5h1.172l0.828 0.828v11.172z"></path>
                     </svg>
