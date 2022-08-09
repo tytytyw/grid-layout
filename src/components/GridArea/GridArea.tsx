@@ -16,6 +16,7 @@ export interface Widget {
     minW?: number;
     minH?: number;
     active: boolean;
+    icon: string
 }
 
 interface updatedGrigItem {
@@ -46,18 +47,7 @@ const GridArea = () => {
     }
 
     const updateWidget = (elements: Array<updatedGrigItem>, targetOldPatams: updatedGrigItem, targetNewParams: updatedGrigItem) => {
-        // preventCollision={true}
-        // setactiveWidgets(prev => prev.map(widget => widget.i === targetNewParams.i
-        //     ? {
-        //         ...widget,
-        //         x: targetNewParams.x,
-        //         y: targetNewParams.y,
-        //         w: targetNewParams.w,
-        //         h: targetNewParams.h
-        //     }
-        //     : widget))
 
-        // preventCollision={false}
         setactiveWidgets(prev => prev.map(widget => {
             let newWidgetParam = null
             elements.forEach(el => {
